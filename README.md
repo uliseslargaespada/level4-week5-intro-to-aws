@@ -32,6 +32,27 @@ Students must submit a short Markdown file (or Google Docs) with:
 
 ### Homework Day 2
 
+#### Day 2 Helpers
+
+##### S3 static website hosting policy generator
+* https://awspolicygen.s3.amazonaws.com/policygen.html
+
+> Policy we're using in class:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/*"
+    }
+  ]
+}
+```
+
 #### Part A — Evidence screenshots (required)
 
 1. **Bucket created**
