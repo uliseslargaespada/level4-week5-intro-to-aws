@@ -28,3 +28,29 @@ Students must submit a short Markdown file (or Google Docs) with:
   * AWS account ID
   * email address
 * Do **not** blur the relevant setting (MFA enabled indicator, Budget name/threshold, etc.)
+
+
+### Homework Day 2
+
+#### Part A — Evidence screenshots (required)
+
+1. **Bucket created**
+   * Screenshot: S3 bucket list showing your bucket name.
+2. **Static website hosting enabled**
+   * Screenshot: Bucket **Properties → Static website hosting** showing:
+     * Enabled
+     * Index document = `index.html`
+     * The website endpoint
+3. **Public mode proof (temporary)**
+   * Screenshot: Bucket **Permissions** page showing Block Public Access disabled (or warning banner)
+   * Screenshot: Bucket policy editor showing the `s3:GetObject` public policy
+   * Screenshot: Browser showing the site loaded from the website endpoint (HTTP)
+4. **Private mode restored (required)**
+   * Screenshot: Block Public Access re-enabled
+   * Screenshot: Bucket policy removed (empty/no policy)
+
+#### Part B — Concept questions (short answers)
+
+1. Why do you have to disable Block Public Access to make an S3 static website public?
+2. Why is the S3 website endpoint not suitable for secure production hosting by itself (hint: HTTP only)?
+3. In one sentence: what is the secure pattern we will use with CloudFront?
