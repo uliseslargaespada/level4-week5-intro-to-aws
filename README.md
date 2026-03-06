@@ -2,7 +2,7 @@
 
 In this repo we'll talk about setting up AWS tru the console.
 
-### Homework Day 1
+### Homework Day 1 - Intro to AWS
 
 Students must submit a short Markdown file (or Google Docs) with:
 
@@ -29,15 +29,16 @@ Students must submit a short Markdown file (or Google Docs) with:
   * email address
 * Do **not** blur the relevant setting (MFA enabled indicator, Budget name/threshold, etc.)
 
-
-### Homework Day 2
+### Homework Day 2 - S3 Bucket Config
 
 #### Day 2 Helpers
 
 ##### S3 static website hosting policy generator
+
 * https://awspolicygen.s3.amazonaws.com/policygen.html
 
 > Policy we're using in class:
+
 ```json
 {
   "Version": "2012-10-17",
@@ -75,3 +76,83 @@ Students must submit a short Markdown file (or Google Docs) with:
 1. Why do you have to disable Block Public Access to make an S3 static website public?
 2. Why is the S3 website endpoint not suitable for secure production hosting by itself (hint: HTTP only)?
 3. In one sentence: what is the secure pattern we will use with CloudFront?
+
+
+### Homework Day 3 - Cloudfront Config
+
+> Policy we're using in class:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCloudFrontReadOnly",
+      "Effect": "Allow",
+      "Principal": { "Service": "cloudfront.amazonaws.com" },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/*",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceArn": "arn:aws:cloudfront::YOUR_ACCOUNT_ID:distribution/YOUR_DISTRIBUTION_ID"
+        }
+      }
+    }
+  ]
+}
+```
+
+
+>  The one form AWS:
+
+```
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::codex-level4-test-app/*",
+            "Condition": {
+                "ArnLike": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::200363996368:distribution/E1IPXWU81IEQ2L"
+                }
+            }
+        }
+    ]
+}
+```
+
+
+#### Part A — Evidence screenshots (required)
+
+1. **CloudFront distribution created**
+
+   * Screenshot: Distribution summary showing **Domain name** and **Status**
+1. **Default root object configured**
+
+   * Screenshot: Setting showing `index.html` as default root object
+1. **Bucket remains private**
+
+   * Screenshot: S3 bucket permissions showing **Block Public Access ON**
+1. **Bucket policy restricts to CloudFront**
+
+   * Screenshot: bucket policy editor showing:
+     * Principal `cloudfront.amazonaws.com`
+     * `AWS:SourceArn` condition
+1. **Working CloudFront URL**
+
+   * Screenshot: browser showing the site loaded via `https://<distribution>.cloudfront.net`
+
+
+#### Part B — Concept questions (short answers)
+
+1. Why do we use the S3 **REST endpoint** for CloudFront + private S3, and why is the **website endpoint** different?
+1. What does **OAC** do in one sentence, and why is it preferred for keeping S3 private behind CloudFront?
+1. What is a CloudFront  **default root object** , and why do we set it to `index.html`?
+1. When would you use an invalidation, and what is the free monthly limit for invalidation paths?
