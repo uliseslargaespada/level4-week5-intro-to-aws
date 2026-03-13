@@ -58,15 +58,15 @@ By the end of today, students can:
 
 ### macOS
 
-Use a package installer from the official download page (recommended for students). 
+Use a package installer from the official download page (recommended for students).
 
 ### Windows
 
-Use the EDB interactive installer listed on the official Windows downloads page. 
+Use the EDB interactive installer listed on the official Windows downloads page.
 
 ### Ubuntu / Debian
 
-Ubuntu includes PostgreSQL packages. Install via apt: 
+Ubuntu includes PostgreSQL packages. Install via apt:
 
 ```bash
 sudo apt update
@@ -185,7 +185,7 @@ Expected:
 
 - `✅ Schema applied successfully.`
 
-> The schema uses `CREATE EXTENSION IF NOT EXISTS pgcrypto;` and table creation statements. 
+> The schema uses `CREATE EXTENSION IF NOT EXISTS pgcrypto;` and table creation statements.
 
 If you see an error about `pgcrypto` not being available, the install is missing the extension package. (On some Linux setups this can require a “contrib” package.)
 
@@ -325,7 +325,7 @@ Open:
 
 ---
 
-# Homework (60 minutes) — screenshots required
+# Homework (60 minutes) — screenshots required - Extra Credit
 
 ## A) Postgres + schema proof
 
